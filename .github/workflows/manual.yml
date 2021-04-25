@@ -34,7 +34,8 @@ jobs:
          mkdir -p ~/.ssh/
          echo "$SSH_PRIVATE_KEY" > ~/private_vps.key
          sudo chmod 600 ~/private_vps.key
-         echo "$SSH_HOST" > ~/.ssh/known_hosts
+         # echo "$SSH_HOST" > ~/.ssh/known_hosts
+         ssh-keygen -R 189.126.111.47 > ~/.ssh/known_hosts
          scp -i ~/private_vps.key phpinfo.php root@189.126.111.47:/root/git_actions/
       shell: bash
       env:
