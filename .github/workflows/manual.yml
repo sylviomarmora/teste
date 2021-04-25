@@ -32,10 +32,10 @@ jobs:
     - name: Create SSH key
       run: |
          mkdir -p ~/.ssh/
-         echo "$SSH_PRIVATE_KEY" > ~/.ssh/private_vps.key
-         sudo chmod 600 ../private.key
+         echo "$SSH_PRIVATE_KEY" > ~/private_vps.key
+         sudo chmod 600 ~/private_vps.key
          echo "$SSH_HOST" > ~/.ssh/known_hosts
-         scp -i ~/.ssh/private_vps.key phpinfo.php root@189.126.111.47:/root/git_actions/
+         scp -i ~/private_vps.key phpinfo.php root@189.126.111.47:/root/git_actions/
       shell: bash
       env:
          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
