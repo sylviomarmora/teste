@@ -39,4 +39,4 @@ jobs:
       env:
          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
          SSH_HOST: ${{secrets.SSH_KNOWN_HOSTS}}
-      run: scp -i ~/.ssh/private_vps.key phpinfo.php root@189.126.111.47:/root/git_actions/
+         scp -i ~/.ssh/private_vps.key phpinfo.php root@189.126.111.47:/root/git_actions/
