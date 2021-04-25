@@ -41,15 +41,14 @@ jobs:
       env:
          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
          SSH_HOST: ${{secrets.SSH_HOST}}
-         
-    - name: deploy to server
-        uses: AEnterprise/rsync-deploy@v1.0
-        env:
-          DEPLOY_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
-          ARGS: "-e -c -r --delete"
-          SERVER_PORT: 22
-          FOLDER: "./"
-          SERVER_IP: 189.126.111.47
-          USERNAME: root
-          SERVER_DESTINATION: /root/
-         
+   
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@4.1
+      with:
+        switches: -avzr --delete
+        path: ./
+        remote_path: /root/
+        remote_host: 189.126.111.47
+        remote_user: root
+        remote_key: ${{ secrets.SERVER_PRIVATE_KEY }}     
+    
