@@ -29,25 +29,13 @@ jobs:
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }}" > GIT_ACTION.TXT
       
-    - name: Create SSH key
-      run: |
-         mkdir -p ~/.ssh/
-         echo "$SSH_PRIVATE_KEY" > ~/private_vps.key
-         sudo chmod 600 ~/private_vps.key
-         echo "$SSH_HOST" > ~/.ssh/known_hosts
-         #ssh-keyscan -p 22 -t rsa 189.126.111.47 > ~/.ssh/known_hosts
-         scp -i ~/private_vps.key phpinfo.php root@189.126.111.47:/root/git_actions/
-      shell: bash
-      env:
-         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
-         SSH_HOST: ${{secrets.SSH_HOST}}
    
     - name: rsync deployments
       uses: burnett01/rsync-deployments@4.1
       with:
         switches: -avzr --delete
         path: ./
-        remote_path: /root/
+        remote_path: /root/git_actions/
         remote_host: 189.126.111.47
         remote_user: root
         remote_key: ${{ secrets.SERVER_PRIVATE_KEY }}     
