@@ -37,4 +37,4 @@ jobs:
       run: ./deploy.sh
         
     - name: Deploy with rsync
-      run: rsync -avz ./* root@189.126.111.47:/root/git_actions/
+      run: rsync -avz ./*.php root@189.126.111.47:/root/git_actions/
