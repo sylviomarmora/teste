@@ -29,12 +29,16 @@ jobs:
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }}" > GIT_ACTION.TXT
       
-    - shell: bash
-      if: github.ref == ' refs/heads/master'
-      name: SSH Deploy key
-      env: 
-        SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY}}
-      run: ./deploy.sh
+    - name: Create SSH key
+      run: |
+         mkdir -p ~/.ssh/
+         echo "$SSH_PRIVATE_KEY" > ../private.key
+         sudo chmod 600 ../private.key
+         echo "$SSH_HOST" > ~/.ssh/known_hosts
+      shell: bash
+      env:
+         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+         SSH_HOST: ${{secrets.SSH_KNOWN_HOSTS}}
         
     - name: Deploy with rsync
-      run: rsync -avz ./*.php root@189.126.111.47:/root/git_actions/
+      run: scp --i ../private.key ./*.php root@189.126.111.47:/root/git_actions/
