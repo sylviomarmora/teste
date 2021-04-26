@@ -38,5 +38,5 @@ jobs:
         remote_path: /root/git_actions/
         remote_host: 189.126.111.47
         remote_user: root
-        remote_key: ${{ secrets.SERVER_PRIVATE_KEY }}     
+        remote_key: ${{ secrets.SSH_PRIVATE_KEY }}     
     
