@@ -28,13 +28,14 @@ jobs:
     # Runs a single command using the runners shell
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }}" > GIT_ACTION.TXT
-      
+           echo "Hello 2 ${{ github.event.inputs.name }}" > GIT_ACTION2.TXT
+
    
     - name: rsync deployments
       uses: burnett01/rsync-deployments@4.1
       with:
         switches: -avzr --delete
-        path: ./
+        path: .
         remote_path: /root/git_actions/
         remote_host: 189.126.111.47
         remote_user: root
